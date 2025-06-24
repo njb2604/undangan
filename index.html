@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Umam & Dhifa</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+<body>
+  <div class="welcome-container">
+    <video autoplay muted playsinline id="welcome-bg-video">
+    <source src="wedding floral.mp4" type="video/mp4" />
+    Browser Anda tidak mendukung tag video.
+  </video>
+    <div class="overlay"></div>
+    <div class="welcome-message">
+      <div class="flower-frame">
+        <div class="text-overlay">
+          <h1>Umam & Dhifa</h1>
+          <p>Yth.<br><strong>nama tamu undangan</strong></p>
+          <button id="open-invitation">
+            <i class="fa-solid fa-right-to-bracket"></i> Buka Undangan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="transition-player-container" class="hidden full-screen-video-player">
+    <video id="one-time-transition-video" playsinline>
+      <source src="transition_view.mp4" type="video/mp4" />
+      Browser Anda tidak mendukung tag video.
+    </video>
+  </div>
+  
+ <div id="main-invitation" class="hidden">
+  <!-- Video Background -->
+  <video autoplay muted playsinline id="main-bg-video">
+    <source src="wedding floral.mp4" type="video/mp4" />
+    Browser Anda tidak mendukung tag video.
+  </video>
+  <div id="after-video-overlay"></div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <p class="subtitle">The Wedding Of</p>
+    <h2 class="couple-name">Umam & Dhifa</h2>
+    <p class="date">25 Agustus 2025</p>
+  </section>
+</div>
+
+
+    <main class="content-after-invitation">
+      <div class="background-wrapper">
+        <video autoplay muted playsinline class="background-video">
+          <source src="wedding floral.mp4" type="video/mp4" />
+          Browser Anda tidak mendukung tag video.
+        </video>
+
+  <!-- Lapisan Transparan di atas Video -->
+      <div class="background-overlay"></div>
+    </div>
+    <div class="content-wrapper">
+      <section class="quote-section">
+        <blockquote>
+          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+        </blockquote>
+        <p class="quote-source">QS Ar Rum ayat 21</p>
+      </section>
+      <img src="ornamen.jpg" alt="Ornamen Jawa" class="dekorasi-kanan">
+    </div>
+    </main>
+
+    <main class="content-after-quote">
+      <section class="opening-section">
+        <div class="opening-content">
+          <img src="motif.jpg" alt="Ornament" class="opening-ornament left">
+          <div class="opening-text">
+            <h3>Assalamualaikum Warahmatullahi Wabarakatuh</h3>
+            <p>
+              Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami.
+            </p>
+          </div>
+          <img src="motif.jpg" alt="Ornament" class="opening-ornament right">
+        </div>
+
+        <video autoplay muted loop playsinline id="bg-video">
+          <source src="vecteezy_ai-generated-minimalist-video-background-of-flower_40806693.mp4" type="video/mp4" />
+          Browser Anda tidak mendukung tag video.
+        </video>
+      </section>      
+      <section class="bride-section">
+        <div class="person-container">
+          <div class="signature">Umam</div>
+          <h2 class="name">Muhammad Fatikhul Umam</h2>
+          <p class="title"><strong>Putra Dari</strong></p>
+          <p class="parents">Bapak Supanan & Ibu Siti Aminah</p>
+          <a href="https://instagram.com/umam" class="ig" target="_blank">@umam</a>
+        </div>
+      </section>
+        <div class="section-divider">
+          <hr />
+          <div class="divider-icon">❤️</div>
+          <hr />
+        </div>
+      </section>
+      <section class="groom-section">
+        <div class="person-container">
+          <div class="signature">Dhifa</div>
+          <h2 class="name">Hanif Nadhifa</h2>
+          <p class="title"><strong>Putri Dari</strong></p>
+          <p class="parents">Bapak Hidayat & Ibu Siti Aminah </p>
+          <a href="https://instagram.com/dhifa" class="ig" target="_blank">@dhifa</a>
+        </div>
+      </section>
+    </main>
+    <main class="content-after-opening-section">
+      
+      <section class="save-the-date">
+          <div class="date-content-frame">
+              <h2>Countdown</h2>
+              <div class="countdown">
+                  <div class="time-box">
+                      <span class="number" id="days">0</span><span class="label">Days</span>
+                  </div>
+                  <div class="time-box">
+                      <span class="number" id="hours">0</span><span class="label">Hours</span>
+                  </div>
+                  <div class="time-box">
+                      <span class="number" id="minutes">0</span><span class="label">Minutes</span>
+                  </div>
+                  <div class="time-box">
+                      <span class="number" id="seconds">0</span><span class="label">Seconds</span>
+                  </div>
+              </div>
+              <p class="invitation-text">
+                  Bersamaan dengan ini, kami bermaksud mengundang Bapak/Ibu/Saudara/i ke acara pernikahan kami. Acara tersebut akan dilaksanakan pada:
+              </p>
+          </div>
+      </section> <div class="event-details-container">
+  
+          <div class="event-circle akad">
+              <h3 class="event-title">Akad Nikah</h3>
+              <p class="event-date">25 . 08 . 2025</p> <p class="event-time">PUKUL : 09.00 WIB</p>
+              <p class="event-location">
+                  Masjid Sidoarjo,<br> Buduran
+                  </p>
+              <a href="#" class="map-button">
+                <i class="fas fa-map-marker-alt"></i>
+                  Google Maps
+              </a>
+          </div>
+  
+          <div class="event-circle resepsi">
+              <h3 class="event-title">Resepsi</h3>
+               <p class="event-date">25 . 08 . 2025</p> <p class="event-time">PUKUL : 11.00 WIB - Selesai</p>
+              <p class="event-location">
+                  Aston Hotel, Buduran, <br> Sidoarjo, Jawa Timur
+                   </p>
+               <a href="https://maps.app.goo.gl/U2svyh6aUMYTyzpj8?g_st=aw" class="map-button">
+                <i class="fas fa-map-marker-alt"></i>
+                   Google Maps
+               </a>
+          </div>
+  
+      </div> </main> 
+      
+      <section class="rsvp-section">
+        <div class="section-header">
+          <h2>RSVP</h2>
+          <p>
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga apabila
+            Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+            Atas kehadiran serta doa restu, kami ucapkan terima kasih.
+          </p>
+        </div>
+        <form class="rsvp-form">
+          <input type="text" name="namaLengkap" placeholder="Nama Lengkap" required>
+          <select name="konfirmasiKehadiran" required>
+            <option value="">Konfirmasi Kehadiran</option>
+            <option value="hadir">Hadir</option>
+            <option value="tidak">Tidak Hadir</option>
+          </select>
+          <button type="submit">Kirim Konfirmasi</button>
+        </form>
+      </section>
+      
+    
+      <section class="wedding-wish-section">
+        <div class="section-header">
+          <h2>Wedding Wish</h2>
+          <p>Kirimkan Doa & Ucapan Kepada kedua Mempelai</p>
+        </div>
+        <form class="wish-form"> <input type="text" id="wishSenderName" placeholder="Nama" required>
+          <textarea id="wishMessageText" placeholder="Tulis ucapan & doa..." required></textarea>
+          <button type="submit">Kirim Ucapan</button>
+        </form>
+        <div class="ucapan-container">
+          <div class="ucapan-list" id="ucapan-list">
+            </div>
+          </div>
+      </section>
+    
+  <script src="script.js">
+  const button = document.getElementById("open-invitation");
+  const invitation = document.getElementById("main-invitation");
+  const cover = document.querySelector(".welcome-container");
+  const bodyElement = document.body;
+  const htmlElement = document.documentElement;
+
+   // Sembunyikan scrollbar di awal
+   htmlElement.style.overflowY = 'hidden';
+    bodyElement.style.overflowY = 'hidden';
+
+  button.addEventListener("click", () => {
+    cover.style.display = "none"; // Sembunyikan cover
+    invitation.classList.remove("hidden");
+    invitation.classList.add("show"); // Tampilkan undangan
+
+    // Izinkan scroll pada body dan html SETELAH undangan dibuka
+    htmlElement.style.overflowY = 'auto'; // Izinkan scroll vertikal
+    bodyElement.style.overflowY = 'auto';
+  });
+  const wishForm = document.querySelector('.wish-form');
+    const ucapanListEl = document.getElementById('ucapan-list'); // Ganti nama variabel agar tidak bentrok
+    const inputNameEl = document.getElementById('wishSenderName'); // Gunakan ID yang sesuai
+    const inputTextareaEl = document.getElementById('wishMessageText'); // Gunakan ID yang sesuai
+
+    wishForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = inputNameEl.value.trim();
+      const message = inputTextareaEl.value.trim();
+
+      if (name && message) {
+        addUcapanToDisplay(name, message); // Ganti nama fungsi
+        inputNameEl.value = '';
+        inputTextareaEl.value = '';
+      }
+    });
+
+    function addUcapanToDisplay(nama, isiUcapan) {
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('ucapan-item');
+
+      const headerDiv = document.createElement('div');
+      headerDiv.classList.add('ucapan-header');
+
+      const usernameSpan = document.createElement('span');
+      usernameSpan.classList.add('username');
+      usernameSpan.textContent = nama;
+
+      const centangSpan = document.createElement('span');
+      centangSpan.classList.add('centang');
+      centangSpan.textContent = '✔'; 
+
+      headerDiv.appendChild(usernameSpan);
+      headerDiv.appendChild(centangSpan);
+
+      const messageP = document.createElement('p');
+      messageP.textContent = isiUcapan;
+
+      itemDiv.appendChild(headerDiv);
+      itemDiv.appendChild(messageP);
+
+      ucapanListEl.appendChild(itemDiv);
+      ucapanListEl.scrollTop = ucapanListEl.scrollHeight; // Scroll ke ucapan terbaru
+    }
+
+    addUcapanToDisplay("Umam", "Happy wedding !♥️");
+    addUcapanToDisplay("Najib", "Barakallah, samawa dunia akhirat yaaa.");
+
+const rsvpForm = document.querySelector('.rsvp-form');
+const rsvpSubmitButton = rsvpForm.querySelector('button[type="submit"]'); // Ambil tombol submitnya
+
+if (rsvpForm) {
+  rsvpForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const originalButtonText = rsvpSubmitButton.textContent;
+    rsvpSubmitButton.textContent = 'Mengirim...';
+    rsvpSubmitButton.disabled = true; // Nonaktifkan tombol selama proses
+
+    const formData = new FormData(rsvpForm);
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyMnTOVSbRn5iYS5C6TtFyETT-T8XYVhjVNh3PohPbOfJVjz1VL8eCGo-vxBVPpVqjUuA/exec'; // <-- GANTI DENGAN URL ANDA
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => response.json()) // Ubah ke .json() jika Apps Script Anda mengembalikan JSON
+      .then(data => {
+        console.log('Success:', data);
+        alert('Terima kasih! Konfirmasi RSVP Anda telah terkirim.');
+        rsvpForm.reset(); // Mengosongkan form setelah berhasil
+        rsvpSubmitButton.textContent = originalButtonText; // Kembalikan teks tombol
+        rsvpSubmitButton.disabled = false; // Aktifkan kembali tombol
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert('Maaf, terjadi kesalahan saat mengirim konfirmasi. Silakan coba lagi.');
+        rsvpSubmitButton.textContent = originalButtonText; // Kembalikan teks tombol
+        rsvpSubmitButton.disabled = false; // Aktifkan kembali tombol
+      });
+  });
+} else {
+  console.warn('Formulir RSVP dengan kelas ".rsvp-form" tidak ditemukan.');
+}
+
+  </script>
+</body>
+</html>

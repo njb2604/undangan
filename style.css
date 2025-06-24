@@ -1,0 +1,1395 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative; /* Penting agar elemen anak dengan position: absolute, seperti video, merujuk ke container ini */
+    overflow: hidden; 
+  }
+  #welcome-bg-video {
+    position: absolute; /* Mengatur posisi secara absolut di dalam welcome-container */
+    top: 0;
+    left: 0;
+    width: 100%; /* Membuat lebar video 100% dari containernya */
+    height: 100%; /* Membuat tinggi video 100% dari containernya */
+    object-fit: cover; /* PENTING: Ini yang membuat video mengisi seluruh area tanpa terdistorsi, bagian yang tidak muat akan dipotong */
+    z-index: -1; /* Mengirim video ke lapisan paling belakang, di bawah konten lain */
+    margin: 0; /* Menghilangkan margin default */
+    padding: 0; /* Menghilangkan padding default */
+}
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* transparan hitam */
+    z-index: 1;
+  }
+  
+ .welcome-message {
+  z-index: 2;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.text-overlay {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-family: 'Parisienne', cursive;
+  color: #333;
+}
+  
+  .text-overlay h1 {
+    margin: 0;
+    font-size: 40px;
+    color: #940f0f;
+    font-family: 'Parisienne', cursive;
+  }
+  
+  .text-overlay p {
+    margin: 26px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: #922121;
+  }
+  
+  .text-overlay button {
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 8px 16px;
+    background-color: #821515;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* Tombol biar lebih cantik */
+#open-invitation {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #ff9eb3;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#open-invitation:hover {
+  background-color: #ff7c96;
+}
+.full-screen-video-player {
+    position: fixed; /* Fixed agar menutupi seluruh layar */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000; /* Latar belakang hitam jika video belum termuat */
+    display: flex; /* Untuk centering video jika perlu, tapi object-fit harusnya cukup */
+    justify-content: center;
+    align-items: center;
+    z-index: 200; /* Di bawah welcome-container, di atas main-invitation saat aktif */
+    overflow: hidden;
+}
+
+#one-time-transition-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan video mengisi kontainer tanpa distorsi */
+}
+
+
+#main-invitation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    /* Hapus properti background yang salah ini untuk video */
+    /* background: url('vecteezy_ai-generated-minimalist-video-background-of-flower_40806693.mp4') no-repeat center center; */
+    /* background-size: contain, auto; */
+    /* background-repeat: repeat; */
+    /* background-attachment: fixed; */
+    position: relative; /* Penting agar elemen anak dengan position: absolute, seperti video, merujuk ke container ini */
+    overflow: hidden; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in; /* Durasi transisi bisa disesuaikan */
+    z-index: 100;
+}
+#after-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.03), transparent);
+  animation: gentleMotion 6s ease-in-out infinite alternate;
+  transition: opacity 1s ease;
+}
+
+/* Animasi gerakan ilusi lembut */
+@keyframes gentleMotion {
+  0%   { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.02) rotate(0.2deg); }
+}
+
+#main-bg-video {
+    position: absolute; /* Mengatur posisi secara absolut di dalam welcome-container */
+    top: 0;
+    left: 0;
+    width: 100%; /* Membuat lebar video 100% dari containernya */
+    height: 100%; /* Membuat tinggi video 100% dari containernya */
+    object-fit: cover; /* PENTING: Ini yang membuat video mengisi seluruh area tanpa terdistorsi, bagian yang tidak muat akan dipotong */
+    z-index: -1; /* Mengirim video ke lapisan paling belakang, di bawah konten lain */
+    margin: 0; /* Menghilangkan margin default */
+    padding: 0; /* Menghilangkan padding default */
+    transform: scale(1.3);
+    transition: transform 2s ease-out;
+}
+@keyframes zoomOutToNormal {
+ from {
+ transform: scale(1.3);
+ }
+ to {
+transform: scale(1);
+  }
+}
+
+#main-bg-video.zoom-effect {
+animation: zoomOutToNormal 3s ease-out forwards;
+}
+.show {
+  display: block; 
+}
+.show-flex {
+    display: flex !important;
+}
+.hidden {
+  display: none;
+}
+
+.hero-section {
+  position: absolute; /* Atau biarkan default (static) */
+  z-index: 2; /* Di atas ::before */
+  top: 50%; /* Kembali ke tengah vertikal */
+  left: 50%; /* Kembali ke tengah horizontal */
+  transform: translate(-50%, -50%); /* Koreksi posisi tengah */
+  text-align: center;
+  padding: 50px 40px; /* Sesuaikan padding */
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  color: #5e3f3f;
+  width: auto;
+  max-width: 85%; 
+  
+}
+.subtitle {
+  font-size: 24px;
+  font-style: italic;
+  color: #59b8eb;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeInUp 1s forwards; /* Ganti dari fadeInRight */
+  animation-delay: 0.4s;
+}
+.couple-name {
+  font-family: 'Parisienne', cursive;
+  font-size: 44px;
+  color: #941313;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+  opacity: 0;
+  animation: fadeInUp 1s forwards; /* Ganti dari fadeInRight */
+  animation-delay: 0.6s;
+}
+.date {
+  font-size: 24px;
+  font-style: italic;
+  color: #59b8eb;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeInUp 1s forwards; /* Ganti dari fadeInRight */
+  animation-delay: 0.8s;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Video Background untuk section */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Agar memenuhi area tanpa distorsi */
+  z-index: 0;
+  opacity: 0.5; /* Bisa diubah agar video lebih atau kurang terlihat */
+  pointer-events: none; /* Agar elemen lain bisa diklik */
+  border-radius: 0 0 20px 20px; /* Tambahan opsional jika ingin sudut bawah membulat */
+}
+
+/* Overlay Transparan Berwarna */
+.background-overlay {
+  position: absolute;
+  height: 400px; /* Video hanya setinggi 400px */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* DIBAWAH semua konten */
+  overflow: hidden;
+}
+.content-wrapper {
+  position: relative;
+  z-index: 2; /* Di atas video & overlay */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4%;
+  align-items: center;
+  justify-content: center;
+}
+.content-after-invitation {
+  padding: 80px 5% 50px 5%; /* Padding Atas, Kanan/Kiri, Bawah */
+  position: relative; /* Tetap diperlukan untuk ::before jika masih dipakai */
+  z-index: 1;
+
+  /* --- Terapkan Flexbox --- */
+  display: flex;
+  align-items: center; /* Coba 'flex-start' jika ingin rata atas */
+  justify-content: center; /* Coba 'space-between' atau 'space-around' */
+  gap: 4%; /* Jarak antara quote dan gambar */
+  flex-wrap: wrap; 
+  clip-path: polygon(0% 80px, 100% 0px, 100% 100%, 0% 100%);
+  position: relative;
+  z-index: 2; /* Lebih tinggi dari video dan overlay */
+}
+.content-after-invitation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px; /* Samakan dengan nilai Y tertinggi di clip-path */
+  z-index: -1; /* Letakkan di belakang konten .content-after-invitation */
+  background: linear-gradient(
+    175deg, /* Perkiraan sudut kemiringan garis antar warna */
+    #7bdcdf 49.9%, /* Warna lebih gelap (perkiraan dari gambar) */
+    #81e1e7 50.1%  /* Warna lebih terang (perkiraan dari gambar) */
+  );
+}
+.quote-section {
+  margin-bottom: 40px; 
+  flex-basis: 55%; /* Contoh: Lebar 55% */
+  max-width: 55%; 
+  text-align: left;
+  color: #444;
+  padding-top: 100px; /* Tetap perlu jika pakai clip-path di atas */
+  margin-top: 0;
+}
+.quote-section blockquote,
+.quote-section .quote-source {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Atur kondisi elemen quote SETELAH animasi (saat class 'animate-on-scroll' ditambahkan oleh JS) */
+.quote-section.animate-on-scroll blockquote {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.8s; /* Blockquote muncul pertama */
+}
+
+.quote-section.animate-on-scroll .quote-source {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.9s; /* Muncul setelah blockquote */
+}
+
+
+.quote-section blockquote {
+  font-family: 'Georgia', serif;
+  font-size: 1.1em;
+  font-style: italic;
+  line-height: 1.7;
+  margin: 0 0 1.5em 0;
+  border-left: 3px solid #ccc;
+  padding-left: 1em;
+  text-align: left; /* Teks quote rata kiri */
+}
+
+.quote-section .quote-source {
+  font-family: 'Playfair Display', serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: #555;
+  margin-top: 0;
+  text-align: center; /* Sumber rata tengah */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+/* --- Gambar Dekorasi sebagai Flex Item --- */
+.dekorasi-kanan {
+  /* ... (flex-basis, max-width, width, height, display, margin-bottom tetap sama) ... */
+  flex-basis: 30%;
+  max-width: 180px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin-bottom: 40px;
+
+  opacity: 0; /* Mulai transparan */
+  transform: translateX(40px); /* Mulai sedikit ke kanan (keluar layar) */
+  /* Definisikan transisi */
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+  /* Beri sedikit delay agar muncul setelah quote (sesuaikan) */
+  transition-delay: 0.6s; /* Jalankan 0.6 detik setelah trigger */
+}
+
+.dekorasi-kanan.animate-on-scroll {
+  opacity: 0.8; /* Kembali ke opacity yang diinginkan */
+  transform: translateX(0); /* Kembali ke posisi normal (geser ke kiri) */
+}
+.content-after-quote {
+  padding: 80px 5% 50px 5%;
+  position: relative; 
+  z-index: 1;         
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+  flex-wrap: wrap;
+  box-sizing: border-box; 
+  min-height: 70vh; 
+  overflow: hidden; 
+
+  background: url('vecteezy_ai-generated-minimalist-video-background-of-flower_40806693.mp4') repeat; 
+  background-size: contain;  
+  color: #333; 
+  text-align: center;
+
+  border-radius: 20px; 
+  clip-path: polygon(0% 80px, 100% 0px, 100% 100%, 0% 100%); 
+  
+}
+.content-after-quote::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px; 
+  z-index: -1; 
+  background: linear-gradient(
+    175deg, 
+    #341d1d 49.9%, 
+    #f0e49d 50.1%  
+  );
+}
+
+.opening-section {
+  flex-basis: 100%;
+  max-width: 800px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: #5e3f3f;
+  padding: 40px 20px;
+  background-color: #62cee7;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.opening-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #e58c8c;
+  font-style: italic;
+}
+
+.opening-section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+.opening-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #fff9f7;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.opening-content {
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  text-align: center;
+  gap: 20px;
+}
+
+.opening-text {
+  flex: 1;
+  font-family: 'Playfair Display', serif;
+  color: #5e3f3f;
+}
+
+.opening-text h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #821515;
+}
+
+.opening-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.opening-ornament {
+  width: 60px;
+  height: auto;
+  opacity: 0.7;
+}
+.bride-section, .groom-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.person-container {
+  max-width: 500px;
+  width: 100%;
+}
+
+.person-container .signature {
+  font-size: 36px;
+  font-style: italic;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.person-container .name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #ffffff;
+}
+
+.person-container .title {
+  font-size: 18px;
+  margin: 10px 0 5px;
+  color: #ffffff;
+}
+
+.person-container .parents {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.person-container .ig {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #821515;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.person-container .ig:hover {
+  background-color: #b92e4c;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  gap: 15px;
+  padding: 0 40px;
+}
+
+.section-divider hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #aaa;
+  margin: 0;
+}
+
+
+.divider-icon {
+  font-size: 60px;
+  align-items: center;
+}
+
+.content-after-opening-section {
+  
+  position: relative; 
+  padding: 80px 5% 50px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4%;
+  flex-wrap: wrap;
+  overflow: hidden; /* Penting agar ::before yang di-scale tidak keluar */
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  /* Background Layers - Hapus adat.jpg dari sini */
+  background:
+    /* Layer 1: Gradient Radial */
+    radial-gradient(closest-corner at center, #48a97c 0%, #3a6dbb 40%, #ffffff 100%),
+    /* Layer 2: Gradient Repeating Radial */
+    repeating-radial-gradient(
+      135deg,
+      #563b2c,
+      #5e3f2b 20px,
+      #2f61b1 20px,
+      #2f61b1 40px,
+      #ffffff 40px,
+      #ffffff 60px
+    );
+  background-blend-mode: normal;
+
+  border-radius: 20px;
+  clip-path: polygon(0% 80px, 100% 0px, 100% 100%, 0% 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 95%);
+
+  /* Content Styling */
+  color: #333;
+  text-align: center;
+  z-index: 1; /* Pastikan konten utama di atas pseudo-element */
+}
+
+.content-after-opening-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Harus 100% untuk menutupi seluruh area */
+
+  /* Background untuk animasi */
+  background: url('wayang.jpg') no-repeat center center;
+  background-size: cover; 
+
+  /* Opacity dan z-index */
+  opacity: 0.9; /* Opacity awal, akan dianimasikan oleh keyframes */
+  z-index: -1; /* Letakkan di belakang konten utama */
+
+  pointer-events: none;
+}
+
+
+   .content-after-opening-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* Samakan dengan nilai Y tertinggi di clip-path */
+    z-index: -1; /* Di belakang ::before (-1). Coba -1 jika ::before tidak ada/untuk tes */
+    background: linear-gradient(
+      175deg,
+      #fcfcfc 49.9%,
+      #f3f3f3 50.1%
+     );
+    pointer-events: none; 
+  }
+  .save-the-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ambil lebar penuh untuk centering */
+    padding: 0 20px; 
+    background: transparent; /* Pastikan transparan */
+    position: relative; /* Tetap relative jika diperlukan */
+    margin-bottom: 0; /* Hapus margin bawah, jarak diatur oleh gap parent */
+  }
+  
+  .date-content-frame {
+    display: inline-block; 
+    width: 450px;  /* Lebar lingkaran (sesuaikan) */
+    max-width: 90%; /* Batas lebar maksimum di layar kecil */
+    aspect-ratio: 1 / 1; /* Paksa rasio 1:1 agar jadi kotak -> lingkaran */
+    border-radius: 50%; /* Ini yang membuatnya jadi lingkaran! */
+    background: url('ornamen 2.jpg') no-repeat center center; /* Ganti dengan nama file gambar yang benar */
+    background-size: cover; 
+    color: #e7e7e7; /* Warna teks di dalam lingkaran */
+    padding: 40px; /* Jarak antara konten dan tepi lingkaran */
+    box-sizing: border-box; /* Padding dihitung dalam width/height */
+    overflow: hidden; /* Sembunyikan konten yang keluar dari lingkaran */
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Pusatkan konten secara vertikal di dalam lingkaran */
+    align-items: center; /* Pusatkan konten secara horizontal di dalam lingkaran */
+    text-align: center; /* Pastikan teks juga rata tengah */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  
+  }
+  
+  /* 3. (Opsional) Sedikit penyesuaian pada konten di dalam frame jika perlu */
+  .save-the-date h2 {
+    font-size: 2.2rem; /* Sedikit kecilkan agar muat */
+    margin-bottom: 20px; /* Kurangi margin bawah */
+    font-weight: 600;
+    color: #fff; /* Pastikan warna kontras dengan background frame */
+  }
+  
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Kurangi jarak antar box */
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    max-width: 100%; /* Pastikan tidak lebih lebar dari frame */
+  }
+  
+  .time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .time-box .number {
+    font-size: 2.5rem; /* Sesuaikan ukuran angka */
+    font-weight: bold;
+  }
+  
+  .time-box .label {
+    font-size: 0.9rem; /* Sesuaikan ukuran label */
+    margin-top: 3px;
+  }
+  
+  .invitation-text {
+    font-size: 0.9rem; /* Sesuaikan ukuran teks */
+    max-width: 90%; /* Batasi lebar teks agar tidak terlalu ke tepi */
+    margin: 0 auto;
+    line-height: 1.5;
+    color: #ddd; /* Warna teks undangan */
+  }
+  .event-details-container {
+    display: flex;          /* Susun lingkaran event secara horizontal */
+    justify-content: center;  /* Pusatkan kedua lingkaran */
+    align-items: flex-start;  /* Mulai dari atas */
+    flex-wrap: wrap;        /* Biarkan turun jika layar kecil */
+    gap: 40px;              /* Jarak antar LINGKARAN event (sesuaikan) */
+    width: 100%;            /* Ambil lebar penuh */
+    max-width: 1000px;      /* Batasi lebar maksimum container */
+    padding: 20px;          /* Padding container */
+    box-sizing: border-box;
+    margin-top: -40px; /* Contoh: Tarik sedikit ke atas agar lebih dekat (sesuaikan) */
+  }
+  
+  /* === Styling untuk setiap LINGKARAN Event Baru (.event-circle) === */
+  .event-circle {
+    /* Ukuran & Bentuk Lingkaran */
+    width: 450px; /* Ukuran lingkaran baru (lebih kecil dari utama) */
+    max-width: 90%; /* Batas lebar (%) */
+    aspect-ratio: 1 / 1;
+    border-radius: 50%; /* WAJIB Lingkaran */
+  
+    /* Background & Tampilan */
+    background: url('ornamen 2.jpg') no-repeat center center; /* Ganti dengan nama file gambar yang benar */
+    background-size: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    color: #fefbf9; /* Warna teks gelap di dalam */
+    padding: 40px; /* Padding dalam lingkaran */
+    box-sizing: border-box;
+    overflow: hidden;
+  
+    /* Tata letak konten di dalam lingkaran */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* --- Style Konten di dalam Lingkaran Event Baru --- */
+  .event-circle .event-title {
+    /*font-family: 'Dancing Script', cursive;  Font judul */
+    font-size: 2.2rem; /* Ukuran judul */
+    color: #fefbf9;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  
+  .event-circle .event-time,
+  .event-circle .event-date { /* Anda mungkin perlu menambahkan elemen P untuk tanggal di HTML */
+    /*font-family: 'Playfair Display', serif;  Font detail */
+    font-size: 1.2rem;
+    color: #fefbf9;
+    margin-bottom: 8px;
+  }
+  
+  .event-circle .event-location {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #fefbf9;
+    margin-bottom: 18px;
+    max-width: 95%; /* Agar tidak terlalu mepet tepi */
+  }
+  
+  .event-circle .map-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #bd1212; /* Warna Tombol */
+    color: white;
+    padding: 9px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: sans-serif; /* Font biasa untuk tombol */
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-circle .map-button:hover {
+    background-color: #bc1717; /* Warna hover */
+  }
+  
+  .event-circle .map-button img {
+    width: 15px;
+    height: 15px;
+  }
+  .map-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+    
+  
+  /* === Responsiveness (Contoh) === */
+  @media (max-width: 768px) {
+    .date-content-frame {
+       width: 380px; /* Kecilkan lingkaran utama */
+    }
+    .event-details-container {
+        gap: 20px; /* Kurangi jarak lingkaran event */
+        margin-top: -30px; /* Sesuaikan */
+    }
+    .event-circle {
+       width: 280px; /* Kecilkan lingkaran event */
+       padding: 25px;
+    }
+  }
+  
+  @media (max-width: 650px) {
+    /* Di layar sangat kecil, tumpuk lingkaran event */
+    .event-details-container {
+       flex-direction: column; /* Tumpuk vertikal */
+       align-items: center;   /* Pusatkan tumpukan */
+       gap: 25px;
+       margin-top: 0; /* Reset margin top */
+    }
+    .event-circle {
+       width: 300px; /* Sesuaikan lebar saat ditumpuk */
+       max-width: 85%;
+    }
+    .date-content-frame {
+       width: 320px; /* Kecilkan lagi lingkaran utama */
+       margin-bottom: 20px; /* Beri jarak ke bawah saat event ditumpuk */
+    }
+  }
+
+@media (max-width: 600px) {
+  .opening-content {
+    flex-direction: column;
+  }
+
+  .opening-ornament {
+    width: 50px;
+    margin: 10px 0;
+  }
+}
+
+/* --- Media Query (Contoh untuk layar kecil) --- */
+@media (max-width: 768px) {
+  .content-after-invitation {
+    flex-direction: column; /* Susun ke bawah */
+    align-items: center; /* Pusatkan item */
+    gap: 20px; /* Kurangi jarak */
+    padding: 60px 5% 30px 5%;
+  }
+  .quote-section {
+    flex-basis: 90%; /* Ambil lebar lebih banyak */
+    max-width: 90%;
+    margin-bottom: 20px; /* Kurangi margin bawah */
+    padding-top: 80px; /* Sesuaikan padding atas jika perlu */
+  }
+  .dekorasi-kanan {
+    flex-basis: 60%;
+    max-width: 150px;
+    margin-bottom: 30px;
+    order: -1; /* Optional: Pindahkan gambar ke atas quote di layar kecil */
+  }
+}
+
+.rsvp-section,
+.ucapan-section {
+  background: #fff;
+  padding: 40px 20px;
+  margin: 40px auto;
+  border-radius: 20px;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.rsvp-section h2,
+.ucapan-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #5a3e36;
+}
+
+.rsvp-form,
+.ucapan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.rsvp-form input,
+.ucapan-form input,
+.rsvp-form select,
+.ucapan-form textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: inherit;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.rsvp-form button,
+.ucapan-form button {
+  padding: 12px 24px;
+  background: #a9746e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.rsvp-form button:hover,
+.ucapan-form button:hover {
+  background: #8d5f59;
+}
+
+.ucapan-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ucapan-item {
+  background: #f9f3f1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.ucapan-item strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #7b5243;
+}
+
+.ucapan-item p {
+  margin: 0;
+  font-style: italic;
+  color: #333;
+}
+.rsvp-ucapan-wrapper {
+  background-color: #294045;
+  color: white;
+  padding: 60px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.rsvp-ucapan-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 40px;
+  gap: 30px;
+}
+
+.rsvp-ucapan-header h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.rsvp-ucapan-header p {
+  font-size: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.rsvp-ucapan-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  text-align: center;
+}
+
+.rsvp-section,
+.ucapan-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  border: 1px solid #eee;
+}
+
+.rsvp-form input,
+.ucapan-form input,
+.rsvp-form select,
+.ucapan-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.ucapan-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.rsvp-form button,
+.ucapan-form button {
+  background-color: #ffffff;
+  color: #294045;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.rsvp-form button:hover,
+.ucapan-form button:hover {
+  background-color: #f0eaea;
+}
+
+.ucapan-list {
+  margin-top: 20px;
+  text-align: left;
+}
+.wedding-wish-section,
+.rsvp-section {
+  background-color: #294045;
+  color: white;
+  padding: 60px 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.section-header p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.wish-form,
+.rsvp-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.wish-form input,
+.rsvp-form input,
+.wish-form textarea,
+.rsvp-form select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.wish-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.wish-form button,
+.rsvp-form button {
+  background-color: #ffffff;
+  color: #294045;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.wish-form button:hover,
+.rsvp-form button:hover {
+  background-color: #f0eaea;
+}
+
+/* ... (kode CSS Anda yang lain tetap sama) ... */
+
+/* Pastikan .ucapan-section atau parent yang lebih tinggi tidak membatasi tinggi secara tidak sengaja */
+.wedding-wish-section, /* Atau .ucapan-section jika itu yang Anda gunakan sebagai wrapper utama */
+.rsvp-section {
+  background-color: #294045; /* Warna latar belakang gelap seperti di gambar */
+  color: white;
+  padding: 40px 20px; /* Penyesuaian padding agar mirip gambar */
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  border-radius: 15px; /* Sedikit lengkungan pada kontainer utama */
+  max-width: 700px; /* Sesuaikan lebar maksimal kontainer utama */
+  margin: 40px auto;
+}
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-family: 'Parisienne', cursive;
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.section-header p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 20px auto; /* Beri jarak bawah setelah deskripsi */
+  line-height: 1.6;
+}
+
+/* Formulir Ucapan (jika masih relevan, bisa disesuaikan) */
+.wish-form { /* Atau .ucapan-form */
+  max-width: 500px;
+  margin: 0 auto 30px auto; /* Jarak bawah sebelum daftar ucapan */
+}
+
+.wish-form input,
+.wish-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #56707c; /* Garis batas yang lebih terlihat di background gelap */
+  margin-bottom: 15px;
+  font-size: 15px;
+  background-color: rgba(255, 255, 255, 0.1); /* Sedikit transparan */
+  color: #fff; /* Warna teks input */
+}
+
+.wish-form input::placeholder,
+.wish-form textarea::placeholder {
+  color: #bbb; /* Warna placeholder */
+}
+
+.wish-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.wish-form button {
+  background-color: #ffffff;
+  color: #294045;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.wish-form button:hover {
+  background-color: #f0eaea;
+}
+
+/* ... (Bagian CSS Anda yang lain, biarkan seperti yang sudah ada) ... */
+
+/* Styling untuk Wedding Wish Section secara keseluruhan */
+.wedding-wish-section {
+  background-color: #294045; /* Latar belakang gelap untuk kontras */
+  color: white; /* Warna teks default untuk section ini */
+  padding: 50px 20px; /* Padding atas/bawah dan kiri/kanan */
+  font-family: 'Poppins', sans-serif; /* Font yang konsisten */
+  text-align: center;
+  border-radius: 15px; /* Sudut melengkung untuk section */
+  max-width: 700px; /* Batas lebar maksimal section */
+  margin: 40px auto; /* Posisi di tengah dengan margin atas/bawah */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Bayangan halus */
+}
+
+.wedding-wish-section .section-header {
+  margin-bottom: 30px;
+}
+
+.wedding-wish-section .section-header h2 {
+  font-family: 'Parisienne', cursive;
+  font-size: 42px; /* Ukuran font judul */
+  margin-bottom: 10px;
+  color: #fff; /* Warna font judul */
+}
+
+.wedding-wish-section .section-header p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 25px auto; /* Margin bawah setelah sub-judul */
+  line-height: 1.7; /* Keterbacaan yang lebih baik */
+  color: #e0e0e0; /* Warna sub-judul yang sedikit lebih lembut */
+}
+
+/* Styling untuk form ucapan */
+.wish-form {
+  max-width: 550px; /* Lebar maksimal form */
+  margin: 0 auto 35px auto; /* Jarak bawah sebelum daftar ucapan */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Jarak antar elemen form */
+}
+
+.wish-form input[type="text"],
+.wish-form textarea {
+  width: 100%;
+  padding: 14px 18px; /* Padding yang lebih nyaman */
+  border-radius: 10px; /* Sudut yang lebih melengkung */
+  border: 1px solid #5a767c; /* Garis batas yang lebih jelas */
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.08); /* Background input yang halus */
+  color: #fff; /* Warna teks input */
+  box-sizing: border-box; /* Pastikan padding dan border termasuk dalam width */
+}
+
+.wish-form input[type="text"]::placeholder,
+.wish-form textarea::placeholder {
+  color: #b0c0c5; /* Warna placeholder yang lebih lembut */
+}
+
+.wish-form textarea {
+  min-height: 120px; /* Tinggi minimal textarea */
+  resize: vertical; /* Izinkan resize vertikal */
+}
+
+.wish-form button[type="submit"] {
+  background-color: #ffffff; /* Background tombol */
+  color: #294045; /* Warna teks tombol, kontras dengan background section */
+  border: none;
+  padding: 14px 25px; /* Padding tombol */
+  border-radius: 10px; /* Sudut melengkung tombol */
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  align-self: center; /* Tombol di tengah jika form lebih lebar */
+  min-width: 180px; /* Lebar minimal tombol */
+}
+
+.wish-form button[type="submit"]:hover {
+  background-color: #f0eaea; /* Warna hover tombol */
+  color: #1c2d30;
+  transform: translateY(-2px); /* Efek angkat saat hover */
+}
+
+/* Kontainer luar untuk daftar ucapan, TIDAK ADA SCROLL DI SINI */
+.ucapan-container {
+  margin-top: 20px; /* Jarak dari form atau elemen di atasnya */
+  /* Tidak perlu background atau border di sini jika .ucapan-list yang akan di-style */
+}
+
+/* INI YANG AKAN MENJADI AREA SCROLL untuk daftar ucapan */
+.ucapan-list {
+  max-height: 350px;  /* TENTUKAN TINGGI MAKSIMAL DI SINI AGAR SCROLL MUNCUL */
+  overflow-y: auto;   /* AKTIFKAN SCROLLBAR VERTIKAL JIKA KONTEN MELEBIHI max-height */
+  padding: 15px;      /* Padding di dalam area scroll, beri ruang dari tepi */
+  background-color: rgba(0, 0, 0, 0.1); /* Background halus untuk area list jika diperlukan */
+  border-radius: 12px; /* Sudut melengkung untuk area list */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Jarak antar .ucapan-item */
+}
+
+/* Styling untuk setiap item ucapan (kotak putih) */
+.ucapan-item {
+  background-color: #ffffff; /* Latar belakang putih untuk setiap item */
+  border-radius: 10px;     /* Lengkungan sudut item */
+  padding: 15px 20px;      /* Padding di dalam item */
+  color: #333333;         /* Warna teks default di dalam item (gelap) */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* Bayangan yang lebih lembut */
+  text-align: left;        /* Teks rata kiri */
+  /* min-height: 60px; /* Opsional: tinggi minimal jika ingin item tidak terlalu pendek */
+  /* display: flex; flex-direction: column; /* Jika butuh flex di dalam item */
+}
+
+.ucapan-item .ucapan-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* Jarak antara header dan pesan */
+  font-weight: bold;
+  font-size: 15px;
+  color: #294045; /* Warna nama pengirim, bisa disamakan dengan warna section */
+}
+
+.ucapan-item .ucapan-header .username {
+  /* Bisa tambahkan styling khusus jika perlu */
+  margin-right: 8px; /* Jarak antara nama dan ikon centang */
+}
+
+.ucapan-item .ucapan-header .centang {
+  display: inline-flex; /* Agar bisa di-align dan diberi padding */
+  align-items: center;
+  justify-content: center;
+  background-color: #ffc107; /* Warna kuning untuk centang (mirip gambar) */
+  color: #fff; /* Warna ikon centang */
+  font-size: 10px;
+  width: 16px; /* Lebar dan tinggi agar sedikit bulat */
+  height: 16px;
+  border-radius: 50%; /* Membuatnya bulat */
+  /* padding: 2px 4px; /* Dihapus karena menggunakan width/height untuk bentuk */
+  /* margin-left: 8px; /* Dipindahkan ke .username margin-right */
+}
+
+.ucapan-item p { /* Styling untuk teks ucapan di dalam .ucapan-item */
+  margin: 0; /* Hapus margin default paragraf */
+  font-size: 14px;
+  line-height: 1.6; /* Keterbacaan teks ucapan */
+  color: #555555;   /* Warna teks ucapan */
+  word-wrap: break-word; /* Memastikan teks panjang akan turun dengan benar */
+}
+
+/* Styling Scrollbar (Opsional, untuk browser WebKit) */
+.ucapan-list::-webkit-scrollbar {
+  width: 8px; /* Lebar scrollbar */
+}
+
+.ucapan-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05); /* Warna track scrollbar (latar belakangnya) */
+  border-radius: 10px;
+}
+
+.ucapan-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Warna thumb scrollbar (yang digeser) */
+  border-radius: 10px;
+}
+
+.ucapan-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5); /* Warna thumb saat di-hover */
+}
+.centang {
+  background: #f1c40f;
+  color: white;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 2px 4px;
+  margin-left: 6px;
+}
+
+
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Mulai sedikit dari bawah */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes untuk animasi */
+@keyframes fadeSlideIn {
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(0);
+  }
+}
