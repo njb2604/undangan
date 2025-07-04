@@ -298,4 +298,29 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+document.addEventListener("DOMContentLoaded", function () {
+  const welcomeBgVideo = document.getElementById("welcome-bg-video");
+
+  if (welcomeBgVideo) {
+    // Pastikan video siap untuk dimainkan
+    welcomeBgVideo.addEventListener("canplay", function () {
+      const duration = welcomeBgVideo.duration;
+      const skipTo = duration - 3; // Mulai dari 5 detik terakhir
+
+      if (duration && skipTo > 0) {
+        welcomeBgVideo.currentTime = skipTo;
+
+        // Paksa play ulang dari titik itu
+        const playPromise = welcomeBgVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.warn("Gagal autoplay video:", error);
+          });
+        }
+      }
+    });
+  } else {
+    console.warn("Elemen video tidak ditemukan");
+  }
+});
   
